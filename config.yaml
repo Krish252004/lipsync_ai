@@ -1,0 +1,37 @@
+project:
+  name: "LipSync AI"
+  version: "0.1.0"
+
+paths:
+  data_raw: "/content/drive/MyDrive/lipsync_ai/data/raw"
+  data_processed: "/content/drive/MyDrive/lipsync_ai/data/processed" # Directory where preprocessed video/audio pairs will be stored
+  samples: "/content/drive/MyDrive/lipsync_ai/data/samples"
+  models: "/content/drive/MyDrive/lipsync_ai/models"
+  
+preprocessing:
+  face_detection_model: "models/face_detection.pb" # (Note: MediaPipe uses its own internal models, this might be a placeholder)
+  target_fps: 25
+  lip_window_size: 5  # Number of frames to consider together (if you implement windowing)
+  lip_region_size: (96, 96)  # Width, height of extracted lip region
+
+feature_extraction:
+  visual_feature_dim: 256
+  temporal_feature_dim: 512
+
+synthesis:
+  sample_rate: 22050
+  n_mels: 80
+  n_fft: 1024
+  hop_length: 256
+  win_length: 1024
+  min_mel_freq: 0
+  max_mel_freq: 8000
+
+training:
+  batch_size: 16
+  num_epochs: 50
+  learning_rate: 0.0001
+  save_interval: 5 # Save models every N epochs
+
+evaluation:
+  batch_size: 32 # Can be larger for evaluation as no gradient computation
